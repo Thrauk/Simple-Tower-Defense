@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine;
 
 [ExecuteAlways]
+[RequireComponent(typeof(TextMeshPro))]
 public class CoordinateLabeler : MonoBehaviour
 {
     [SerializeField] Color defaultColor = Color.white;
@@ -26,13 +27,14 @@ public class CoordinateLabeler : MonoBehaviour
         {
             DisplayCoordinates();
             UpdateObjectName();
+            label.enabled = true;
         }
 
-        ColorCoordinates();
+        SetLabelColor();
         ToggleLabels();
     }
 
-    private void ColorCoordinates()
+    private void SetLabelColor()
     {
         if(waypoint.IsPlaceable) {
             label.color = defaultColor;

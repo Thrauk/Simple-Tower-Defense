@@ -26,8 +26,8 @@ public class Bank : MonoBehaviour
     }
 
     public void Withdraw(int amount) {
-        UpdateDisplay();
         currentBalance -= Mathf.Abs(amount);
+        UpdateDisplay();
         if(currentBalance < 0) {
             // Lose the game
             ReloadScene();
