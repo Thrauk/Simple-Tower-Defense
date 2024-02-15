@@ -20,10 +20,12 @@ public class Tile : MonoBehaviour
 
     private void Start()
     {
-        if(gridManager != null) {
+        if (gridManager != null)
+        {
             coordinates = gridManager.GetCoordinatesFromPosition(transform.position);
 
-            if(!isPlaceable) {
+            if (!isPlaceable)
+            {
                 gridManager.BlockNode(coordinates);
             }
         }
@@ -42,9 +44,12 @@ public class Tile : MonoBehaviour
     {
         if (gridManager.GetNode(coordinates).isWalkable && !pathfinder.WillBlockPath(coordinates))
         {
-            bool isPlaced = towerPreafab.CreateTower(towerPreafab, transform.position);
-            isPlaceable = !isPlaced;
-            gridManager.BlockNode(coordinates);
+            bool isSuccessful = towerPreafab.CreateTower(towerPreafab, transform.position);
+            if (isSuccessful)
+            {
+                gridManager.BlockNode(coordinates);
+                pathfinder.NotifyReceivers();
+            }
         }
     }
 }
